@@ -5,7 +5,8 @@ Hands-on notes and reproducible artifacts for building
 (released 2026-11-23), from source on a distro it doesn't support, booting it on the required `bpf-next`
 kernel, and running its full shield block-then-release attack cycle end to end.
 
-> 📖 Full write-up, with the story and real command output: _dev.to link coming, see the repo description._
+> 📖 Full write-up, with the story and real command output:
+> [dev.to/kaushikkachireddy/building-openai-ciscos-shirudo-from-source...](https://dev.to/kaushikkachireddy/building-openai-ciscos-shirudo-from-source-on-the-wrong-distro-on-purpose-1g5b)
 
 This repo is the supporting material: the exact patches, the build recipe, and the demo orchestration. It
 is not a fork of Shirudo. Nothing from their tree is vendored here. The patches are small diffs you apply
