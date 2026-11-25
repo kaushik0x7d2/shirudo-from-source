@@ -1,0 +1,13 @@
+diff --git a/testing/vm/prepare-runtime.sh b/testing/vm/prepare-runtime.sh
+index 36b0411..729d8c4 100755
+--- a/testing/vm/prepare-runtime.sh
++++ b/testing/vm/prepare-runtime.sh
+@@ -133,7 +133,7 @@ apt-get $apt_opts install '"$PACKAGES"'
+ printf '[test-vm-runtime] preparing %s\n' "$IMAGE" >&2
+ CUSTOMIZE_LOG="${TMP_IMAGE}.virt-customize.log"
+ if ! guestfs_run virt-customize \
+-	-a "$TMP_IMAGE" --network --no-selinux-relabel \
++	-a "$TMP_IMAGE" --network \
+ 	--run-command 'growpart /dev/sda 1 && resize2fs /dev/sda1' \
+ 	--upload "$NAMESERVERS:/root/shirudo-nameservers" \
+ 	"${SETUP_ARGS[@]}" \

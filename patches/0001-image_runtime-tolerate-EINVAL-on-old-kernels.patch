@@ -1,0 +1,13 @@
+diff --git a/util/image_runtime.c b/util/image_runtime.c
+index 3402dde..e2f5ecf 100644
+--- a/util/image_runtime.c
++++ b/util/image_runtime.c
+@@ -1122,7 +1122,7 @@ int image_enter(const char *command, int argc, const char **argv)
+ 	if (mode && ret)
+ 		return ret;
+ 	if (ret)
+-		return ret == -ENOENT || ret == -EPERM || ret == -EACCES ? 0 : ret;
++		return ret == -ENOENT || ret == -EPERM || ret == -EACCES || ret == -EINVAL ? 0 : ret;
+ 	if (!mode)
+ 		return -EPROTO;
+ 	ret = image_bootstrap_load();
