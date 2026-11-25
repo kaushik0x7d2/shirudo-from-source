@@ -5,7 +5,7 @@ system package file), so they're documented here rather than as `.patch` files. 
 one root cause: `make target-deps` builds its dependencies **static-only**, but the operator build
 profile resolves them with non-static `pkg-config`, which omits the transitive link set.
 
-## 1. `luajit.pc` — LuaJIT needs libm/libdl when linked statically
+## 1. `luajit.pc`: LuaJIT needs libm/libdl when linked statically
 
 File: `/usr/lib/x86_64-linux-gnu/pkgconfig/luajit.pc`
 
@@ -17,7 +17,7 @@ Append `-lm -ldl` to the `Libs:` line. Without it, the static link fails with un
 +Libs: -L${libdir} -lluajit-5.1 -lm -ldl
 ```
 
-## 2. `config.mk` — use the full static link sets
+## 2. `config.mk`: use the full static link sets
 
 After `make config.mk CC=clang`, replace these variables with their `pkg-config --static` values:
 

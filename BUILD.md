@@ -1,6 +1,6 @@
 # Building Shirudo from source on Debian 12 (bookworm)
 
-Shirudo targets bleeding-edge distros. Building it on **Debian 12** — which it does *not* support — is a
+Shirudo targets bleeding-edge distros. Building it on **Debian 12**, which it does *not* support, is a
 good way to find exactly where the hard dependencies are. The only true hard requirement turns out to be
 the kernel; everything else is a soft spot you can work around. The test VM Shirudo boots uses a
 **prebuilt `bpf-next` kernel artifact the project ships**, so you do *not* have to compile a kernel.
@@ -24,14 +24,14 @@ sudo apt-get install -y \
   luajit libluajit-5.1-dev docker.io jq \
   autoconf automake libtool autoconf-archive              # target-deps needs autoreconf
 
-# console-setup's postinst fails on a headless VM and jams dpkg/apt — remove it
+# console-setup's postinst fails on a headless VM and jams dpkg/apt, so remove it
 sudo apt-get purge -y console-setup keyboard-configuration
 ```
 
 ## 2. Static dependencies (`make target-deps`)
 
 Builds OpenSSL 3.5.9 / libcurl 8.18 / tpm2-tss 4.2 as static libs into `build/target-deps/`
-(bookworm ships OpenSSL 3.0 — too old; 3.5 is the first release with **ML-DSA**, which Shirudo's
+(bookworm ships OpenSSL 3.0, which is too old; 3.5 is the first release with **ML-DSA**, which Shirudo's
 post-quantum signatures require). Creates `build/target-deps/target.env`.
 
 ```bash
@@ -92,7 +92,7 @@ Out the other side: a statically-linked `shirudo` (~15.7 MB PIE) and `tools/shir
 sudo usermod -aG kvm "$USER"          # re-login after this
 sudo prlimit --pid $$ --memlock=unlimited:unlimited
 
-testing/vm/kernel-artifact.sh fetch   # prebuilt bpf-next kernel — no kernel compile
+testing/vm/kernel-artifact.sh fetch   # prebuilt bpf-next kernel, no kernel compile
 export LIBGUESTFS_BACKEND=direct
 make stack-up                         # OCI registry + ClickHouse + OTel collector (Docker)
 make -C testing vm-clean VM_NAME=quickstart
@@ -105,4 +105,4 @@ Then run [`scripts/demo.sh`](scripts/demo.sh) for the full shield block → rele
 > **Test-harness gotcha:** `make vm-ssh` opens a *fresh* SSH connection per command. A scripted demo
 > that fires ~9 of them in a burst will exhaust the nested guest's user-mode networking and you'll see
 > `SSH did not become ready`. Run all guest steps over a single persistent SSH `ControlMaster`
-> connection instead — that's what `scripts/demo.sh` does.
+> connection instead, which is what `scripts/demo.sh` does.
